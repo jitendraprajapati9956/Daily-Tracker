@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "cd frontend/daily-tracker && npm install && npm run build",
-    "start": "cd backend && npm install && node server.js"
-  }
-
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

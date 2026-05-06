@@ -1,0 +1,17 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+}
+label {
+  display: block;
+  margin: 8px 0;
+}
+input, textarea {
+  margin-left: 10px;
+}
+
+@media (max-width: 600px) {
+  div[style*="grid"] {
+    grid-template-columns: 1fr !important;
+  }
+}

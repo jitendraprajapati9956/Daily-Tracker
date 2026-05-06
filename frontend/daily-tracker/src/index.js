@@ -1,23 +1,14 @@
-/* eslint-disable no-restricted-globals */
-/* eslint-disable no-unused-expressions */
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import { BrowserRouter } from "react-router-dom";
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
-self.__WB_MANIFEST;
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
 
-const CACHE_NAME = 'daily-tracker-cache-v1';
-const urlsToCache = ['/'];
-
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(urlsToCache);
-    })
-  );
-});
-
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
-    })
-  );
-});
+serviceWorkerRegistration.unregister();

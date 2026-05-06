@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  {
   "scripts": {
     "build": "cd frontend/daily-tracker && npm install && npm run build",
     "start": "cd backend && npm install && node server.js"

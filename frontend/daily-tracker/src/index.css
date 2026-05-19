@@ -1,0 +1,89 @@
+/* GLOBAL */
+@import './styles/global.css';
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Inter, sans-serif;
+  background: #f4f7fb;
+  color: #1e293b;
+}
+
+/* COMMON CARD */
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  margin-bottom: 20px;
+}
+
+/* TRACKER GRID */
+
+.tracker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+/* INPUTS */
+
+input[type="text"],
+input[type="number"],
+input[type="checkbox"] {
+  width: auto;
+  margin-right: 8px;
+}
+textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  margin-top: 6px;
+}
+
+textarea {
+  min-height: 100px;
+}
+
+label {
+  font-weight: 500;
+}
+
+/* BUTTON */
+
+.primary-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.primary-btn:hover {
+  opacity: 0.9;
+}
+
+/* DASHBOARD GRID */
+
+.top-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+  gap: 20px;
+}
+
+/* DASHBOARD */
+
+.dashboard {
+  max-width: 1200px;
+  margin: auto;
+  padding: 24px;
+}

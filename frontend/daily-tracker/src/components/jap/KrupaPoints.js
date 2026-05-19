@@ -17,10 +17,32 @@ const KrupaPoints = () => {
   }, []);
 
   return (
-    <div style={card}>
-      <h3>🏆 Krupa Points</h3>
-      <h1>{points}</h1>
-      <p>Consistency score 🙏</p>
+    <div className="card">
+
+      <h2 className="section-title">
+        🏆 Krupa Points
+      </h2>
+
+      <h1
+        style={{
+          fontSize: "54px",
+          color: "#f59e0b",
+          textAlign: "center"
+        }}
+      >
+        {points}
+      </h1>
+
+      <p
+        style={{
+          textAlign: "center",
+          marginTop: "10px",
+          color: "#64748b"
+        }}
+      >
+        Consistency Score 🙏
+      </p>
+
     </div>
   );
 };

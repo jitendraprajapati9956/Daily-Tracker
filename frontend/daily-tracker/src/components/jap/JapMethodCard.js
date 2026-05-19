@@ -33,30 +33,46 @@ const JapMethodCard = () => {
   };
 
   return (
-    <div style={card}>
-      <h3>📿 Jap Method</h3>
+    <div className="card">
 
-      <p>Week: {week}</p>
-      <p>⏱ Jap Time: {japTime} min</p>
+      <h2 className="section-title">
+        📿 Jap Method
+      </h2>
 
-      <ol>
+      <div style={{ marginBottom: "18px" }}>
+        <p><b>Week:</b> {week}</p>
+        <p><b>Jap Time:</b> {japTime} min</p>
+      </div>
+
+      <ol
+        style={{
+          paddingLeft: "20px",
+          lineHeight: "2"
+        }}
+      >
         <li>Seedha betho, aankh bandh</li>
         <li>Slow naam jap sambhdi ne</li>
         <li>End ma shant betho</li>
         <li>Prarthana karo</li>
       </ol>
 
-      <button style={btn} onClick={resetMind}>
-        🧠 Mind Reset
-      </button>
+      <div
+        style={{
+          display: "flex",
+          gap: "14px",
+          marginTop: "24px",
+          flexWrap: "wrap"
+        }}
+      >
+        <button className="primary-btn" onClick={resetMind}>
+          🧠 Mind Reset
+        </button>
 
-      <button style={btn} onClick={handleUrge}>
-        📵 Urge Help
-      </button>
+        <button className="secondary-btn" onClick={handleUrge}>
+          📵 Urge Help
+        </button>
+      </div>
 
-      <p style={{ marginTop: "10px", fontStyle: "italic" }}>
-        “Consistency → Krupa → Feeling”
-      </p>
     </div>
   );
 };

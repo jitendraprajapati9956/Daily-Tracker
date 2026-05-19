@@ -2,15 +2,20 @@ import React from "react";
 
 export default function StreakCard({ streak = 0 }) {
   return (
-    <div style={{
-      border: "1px solid #ddd",
-      padding: "15px",
-      borderRadius: "10px",
-      marginBottom: "20px",
-      textAlign: "center"
-    }}>
+    <div className="card">
       <h3>🔥 Current Streak</h3>
-      <h2>{streak} Days</h2>
+
+      <h1
+        style={{
+          fontSize: "42px",
+          marginTop: "12px",
+          color: "#2563eb"
+        }}
+      >
+        {streak}
+      </h1>
+
+      <p>Days</p>
     </div>
   );
 }

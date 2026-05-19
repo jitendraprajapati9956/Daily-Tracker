@@ -1,0 +1,26 @@
+.navbar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.navbar button {
+  border: none;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.navbar button:hover {
+  transform: translateY(-2px);
+}
+
+.navbar .active {
+  background: #2563eb;
+  color: white;
+}

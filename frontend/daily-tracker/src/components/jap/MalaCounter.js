@@ -20,17 +20,38 @@ const MalaCounter = () => {
   };
 
   return (
-    <div style={card}>
-      <h3>📿 Mala Counter</h3>
-      <h1>{count}</h1>
+    <div className="card">
 
-      <button style={btn} onClick={addCount}>
-        Tap
-      </button>
+      <h2 className="section-title">
+        📿 Mala Counter
+      </h2>
 
-      <button style={{ ...btn, background: "red" }} onClick={reset}>
-        Reset
-      </button>
+      <h1
+        style={{
+          fontSize: "64px",
+          textAlign: "center",
+          marginBottom: "24px",
+          color: "#2563eb"
+        }}
+      >
+        {count}
+      </h1>
+
+      <div
+        style={{
+          display: "flex",
+          gap: "14px"
+        }}
+      >
+        <button className="primary-btn" onClick={addCount}>
+          Tap
+        </button>
+
+        <button className="secondary-btn" onClick={reset}>
+          Reset
+        </button>
+      </div>
+
     </div>
   );
 };

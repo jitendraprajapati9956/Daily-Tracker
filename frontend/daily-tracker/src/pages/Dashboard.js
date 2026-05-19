@@ -25,9 +25,10 @@ import SpiritualRoutineCard from "../components/satsang/SpiritualRoutineCard";
 import SatsangCard from "../components/satsang/SatsangCard";
 import MotivationCard from "../components/satsang/MotivationCard";
 import Navbar from "../components/Navbar";
+import MonthlyTrackerPage from "./MonthlyTrackerPage";
 
 export default function Dashboard() {
- const [activeTab, setActiveTab] = useState("progress");
+  const [activeTab, setActiveTab] = useState("progress");
   const [score, setScore] = useState(0);
   const [noFap, setNoFap] = useState(true);
   const [japDone, setJapDone] = useState(false);
@@ -42,12 +43,12 @@ export default function Dashboard() {
   }, []);
 
   useEffect(() => {
-  const today = new Date().getDay();
+    const today = new Date().getDay();
 
-  if (today === 0) {
-    alert("🔥 Sunday Special: 7–10 Min Jap Today!");
-  }
-}, []);
+    if (today === 0) {
+      alert("🔥 Sunday Special: 7–10 Min Jap Today!");
+    }
+  }, []);
 
   // Dummy monthly data
   const monthlyData = [
@@ -74,86 +75,90 @@ export default function Dashboard() {
   });
 
   return (
-  <div style={{ maxWidth: "1000px", margin: "auto", padding: "10px" }}>
+    <div className="dashboard">  <div style={{ maxWidth: "1000px", margin: "auto", padding: "10px" }}>
+
+      <h2>Dashboard</h2>
+
+      <Navbar active={activeTab} setActive={setActiveTab} />
+      {/* ================= PROGRESS ================= */}
+      {activeTab === "progress" && (
+        <>
+          <BadHabitWarning score={score} noFap={noFap} />
+
+          <div className="top-grid">
+            <StreakCard streak={streak} />
+            <GoalMeter totalDays={30} completedDays={completedDays} />
+          </div>
+
+          <ProgressBar score={score} total={6} />
+
+          <DailyTracker
+            onScoreChange={(s, nf) => {
+              setScore(s);
+              setNoFap(nf);
+            }}
+          />
+
+          <MonthlyChart data={monthlyData} />
+        </>
+      )}
+
+      {/* ================= JAP ================= */}
+      {activeTab === "jap" && (
+        <>
+          <SpiritualRoutineCard
+            japDone={japDone}
+            setJapDone={setJapDone}
+            selfCheck={selfCheck}
+            setSelfCheck={setSelfCheck}
+          />
+
+          <JapMethodCard />
+          <MalaCounter />
+          <KrupaPoints />
+          <JapTimer onComplete={() => setScore(prev => prev + 5)} />
+          <MinimumJapRule onComplete={() => setScore(prev => prev + 5)} />
+        </>
+      )}
+
+      {/* ================= MIND ================= */}
+      {activeTab === "mind" && (
+        <>
+          <MindReset />
+          <EmergencyJap onMini={() => setScore(prev => prev + 2)} />
+          <RecoveryMode />
+          <OverthinkingControl />
+        </>
+      )}
+
+      {/* ================= ROUTINE ================= */}
+      {activeTab === "routine" && (
+        <>
+          <RoutineTimeline />
+          <DayStatusDots />
+          <JapReminder />
+          <WakeUpTracker />
+          <WakeTimeFixer />
+          <BalanceTracker jobDone={true} japDone={true} />
+        </>
+      )}
+
+      {/* ================= SATSANG ================= */}
+      {activeTab === "satsang" && (
+        <>
+          <MotivationCard />
+          <SatsangCard satsang={satsang} setSatsang={setSatsang} />
+        </>
+      )}
+      {/* === TRACKER === */}
+      {activeTab === "tracker" && (
+        <MonthlyTrackerPage />
+      )}
+
+    </div >
+    </div >
     
-    <h2>Dashboard</h2>
-
-    <Navbar active={activeTab} setActive={setActiveTab} />
-    {/* ================= PROGRESS ================= */}
-    {activeTab === "progress" && (
-      <>
-        <BadHabitWarning score={score} noFap={noFap} />
-
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "15px"
-        }}>
-          <StreakCard streak={streak} />
-          <GoalMeter totalDays={30} completedDays={completedDays} />
-        </div>
-
-        <ProgressBar score={score} total={6} />
-
-        <DailyTracker
-          onScoreChange={(s, nf) => {
-            setScore(s);
-            setNoFap(nf);
-          }}
-        />
-
-        <MonthlyChart data={monthlyData} />
-      </>
-    )}
-
-    {/* ================= JAP ================= */}
-    {activeTab === "jap" && (
-      <>
-        <SpiritualRoutineCard
-          japDone={japDone}
-          setJapDone={setJapDone}
-          selfCheck={selfCheck}
-          setSelfCheck={setSelfCheck}
-        />
-
-        <JapMethodCard />
-        <MalaCounter />
-        <KrupaPoints />
-        <JapTimer onComplete={() => setScore(prev => prev + 5)} />
-        <MinimumJapRule onComplete={() => setScore(prev => prev + 5)} />
-      </>
-    )}
-
-    {/* ================= MIND ================= */}
-    {activeTab === "mind" && (
-      <>
-        <MindReset />
-        <EmergencyJap onMini={() => setScore(prev => prev + 2)} />
-        <RecoveryMode />
-        <OverthinkingControl />
-      </>
-    )}
-
-    {/* ================= ROUTINE ================= */}
-    {activeTab === "routine" && (
-      <>
-        <RoutineTimeline />
-        <DayStatusDots />
-        <JapReminder />
-        <WakeUpTracker />
-        <WakeTimeFixer />
-        <BalanceTracker jobDone={true} japDone={true} />
-      </>
-    )}
-
-    {/* ================= SATSANG ================= */}
-    {activeTab === "satsang" && (
-      <>
-        <MotivationCard />
-        <SatsangCard satsang={satsang} setSatsang={setSatsang} />
-      </>
-    )}
-
-  </div>
-);
+  );
+ 
 }
+

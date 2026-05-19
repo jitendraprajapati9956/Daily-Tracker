@@ -37,13 +37,9 @@ export default function DailyTracker({ onScoreChange }) {
   };
 
   return (
-    <div style={{
-      border: "1px solid #ddd",
-      padding: "15px",
-      borderRadius: "10px"
-    }}>
+    <div className="card">
       <h3>Daily Tracker</h3>
-
+    <div className="tracker-grid">
       <label>
         <input type="checkbox" name="satsang" onChange={handleChange} />
         Satsang
@@ -83,6 +79,7 @@ export default function DailyTracker({ onScoreChange }) {
         Notes:
         <textarea name="notes" value={form.notes} onChange={handleChange} />
       </label>
+    </div>
     </div>
   );
 }

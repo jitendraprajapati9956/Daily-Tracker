@@ -1,19 +1,54 @@
 import React from "react";
+import { useAuth } from "../context/AuthContext";
 
 export default function Navbar({ active, setActive }) {
-  const handleClick = (tab) => {
-    if (typeof setActive === "function") {
-      setActive(tab);
-    }
-  };
+  const { user, logout } = useAuth();
+
+  const tabs = [
+    { id: "progress", label: "Progress" },
+    { id: "jap", label: "Jap" },
+    { id: "mind", label: "Mind" },
+    { id: "routine", label: "Routine" },
+    { id: "satsang", label: "Satsang" },
+    { id: "tracker", label: "📅 Tracker" },
+  ];
 
   return (
-    <div style={{ display: "flex", gap: "10px" }}>
-      <button onClick={() => handleClick("progress")}>Progress</button>
-      <button onClick={() => handleClick("jap")}>Jap</button>
-      <button onClick={() => handleClick("mind")}>Mind</button>
-      <button onClick={() => handleClick("routine")}>Routine</button>
-      <button onClick={() => handleClick("satsang")}>Satsang</button>
+    <div className="navbar">
+      <div style={{ display: "flex", alignItems: "center", gap: "4px", flexWrap: "wrap" }}>
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            className={active === tab.id ? "active" : ""}
+            onClick={() => setActive(tab.id)}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      <div style={{ display: "flex", alignItems: "center", gap: "10px", flexShrink: 0 }}>
+        {user && (
+          <span style={{ fontSize: "13px", color: "#64748b" }}>
+            👤 {user.name}
+          </span>
+        )}
+        <button
+          onClick={logout}
+          style={{
+            background: "#ef4444",
+            color: "#fff",
+            border: "none",
+            padding: "6px 14px",
+            borderRadius: "20px",
+            fontSize: "13px",
+            fontWeight: "600",
+            cursor: "pointer",
+          }}
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 }

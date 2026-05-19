@@ -20,7 +20,8 @@ function AppRoutes() {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-   
+   // Add this line inside <Routes>
+<Route path="/reset-password/:token" element={<ProtectedRoute><ResetPasswordPage /></ProtectedRoute>} />
       <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
       <Route path="/report" element={<ProtectedRoute><MonthlyReport /></ProtectedRoute>} />
       <Route path="/streak" element={<ProtectedRoute><StreakPage /></ProtectedRoute>} />

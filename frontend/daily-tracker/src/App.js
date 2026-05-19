@@ -20,7 +20,12 @@ function AppRoutes() {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+<<<<<<< HEAD
    
+=======
+   // Add this line inside <Routes>
+<Route path="/reset-password/:token" element={<ProtectedRoute><ResetPasswordPage /></ProtectedRoute>} />
+>>>>>>> 187a771c8e17bf05e25c8a29098bdab78c94e412
       <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
       <Route path="/report" element={<ProtectedRoute><MonthlyReport /></ProtectedRoute>} />
       <Route path="/streak" element={<ProtectedRoute><StreakPage /></ProtectedRoute>} />
@@ -35,4 +40,8 @@ export default function App() {
       <AppRoutes />
     </AuthProvider>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 187a771c8e17bf05e25c8a29098bdab78c94e412

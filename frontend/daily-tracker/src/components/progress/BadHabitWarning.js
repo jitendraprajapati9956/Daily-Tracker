@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 
 export default function BadHabitWarning({ score, noFap }) {
@@ -15,3 +16,22 @@ export default function BadHabitWarning({ score, noFap }) {
     </div>
   );
 }
+=======
+import React from "react";
+
+export default function BadHabitWarning({ score, noFap }) {
+  if (score >= 3 && noFap) return null;
+
+  return (
+    <div style={{
+      background: "#ffebee",
+      color: "#c62828",
+      padding: "10px",
+      borderRadius: "10px",
+      marginBottom: "15px"
+    }}>
+      ⚠️ Warning: Stay focused on your Bhagwat discipline.
+    </div>
+  );
+}
+>>>>>>> 187a771c8e17bf05e25c8a29098bdab78c94e412

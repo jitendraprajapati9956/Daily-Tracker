@@ -1,10 +1,7 @@
 {
   "name": "daily-tracker",
   "version": "0.1.0",
-<<<<<<< HEAD
   "proxy": "http://localhost:5000",
-=======
->>>>>>> 187a771c8e17bf05e25c8a29098bdab78c94e412
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
@@ -12,10 +9,7 @@
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.13.5",
-<<<<<<< HEAD
     "framer-motion": "^12.38.0",
-=======
->>>>>>> 187a771c8e17bf05e25c8a29098bdab78c94e412
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-router-dom": "^7.13.0",
@@ -30,22 +24,11 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-<<<<<<< HEAD
     "extends": [
       "react-app",
       "react-app/jest"
     ]
   },
-=======
-  "extends": [
-    "react-app",
-    "react-app/jest"
-  ],
-  "rules": {
-    "react-hooks/exhaustive-deps": "warn"
-  }
-},
->>>>>>> 187a771c8e17bf05e25c8a29098bdab78c94e412
   "browserslist": {
     "production": [
       ">0.2%",
@@ -57,7 +40,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-<<<<<<< HEAD
   },
   "devDependencies": {
     "autoprefixer": "^10.5.0",
@@ -65,7 +47,3 @@
     "tailwindcss": "^3.4.19"
   }
 }
-=======
-  }
-}
->>>>>>> 187a771c8e17bf05e25c8a29098bdab78c94e412

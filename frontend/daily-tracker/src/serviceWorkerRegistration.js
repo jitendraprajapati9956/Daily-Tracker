@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     window.location.hostname === '[::1]' ||
@@ -57,7 +56,6 @@ export function unregister() {
     });
   }
 }
-=======
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     window.location.hostname === '[::1]' ||
@@ -116,4 +114,3 @@ export function unregister() {
     });
   }
 }
->>>>>>> 187a771c8e17bf05e25c8a29098bdab78c94e412

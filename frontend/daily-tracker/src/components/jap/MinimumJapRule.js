@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState } from "react";
 
 export default function MinimumJapRule({ onComplete }) {
@@ -24,30 +23,3 @@ export default function MinimumJapRule({ onComplete }) {
     </div>
   );
 }
-=======
-import React, { useState } from "react";
-
-export default function MinimumJapRule({ onComplete }) {
-
-  const [done, setDone] = useState(false);
-
-  const handleComplete = () => {
-    setDone(true);
-    onComplete && onComplete();
-  };
-
-  return (
-    <div style={{ marginTop: "15px" }}>
-      <h3>📿 Daily Minimum Jap (5 Min Compulsory)</h3>
-
-      {!done ? (
-        <button onClick={handleComplete}>
-          Complete 5 Min Jap
-        </button>
-      ) : (
-        <p>✅ Minimum Jap Done (No Excuse Rule)</p>
-      )}
-    </div>
-  );
-}
->>>>>>> 187a771c8e17bf05e25c8a29098bdab78c94e412

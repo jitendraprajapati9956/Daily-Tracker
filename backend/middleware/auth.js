@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
@@ -13,7 +12,6 @@ module.exports = async (req, res, next) => {
   } catch {
     res.status(401).json({ message: "Token invalid" });
   }
-=======
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
@@ -28,5 +26,4 @@ module.exports = async (req, res, next) => {
   } catch {
     res.status(401).json({ message: "Token invalid" });
   }
->>>>>>> 187a771c8e17bf05e25c8a29098bdab78c94e412
 };

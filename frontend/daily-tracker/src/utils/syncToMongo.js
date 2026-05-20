@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 export const syncToMongo = async (data) => {
   try {
     await fetch("http://localhost:5000/api/tracker/save", {
@@ -12,7 +11,6 @@ export const syncToMongo = async (data) => {
     console.log("Sync failed");
   }
 };
-=======
 export const syncToMongo = async (data) => {
   try {
     await fetch("http://localhost:5000/api/tracker/save", {
@@ -26,4 +24,3 @@ export const syncToMongo = async (data) => {
     console.log("Sync failed");
   }
 };
->>>>>>> 187a771c8e17bf05e25c8a29098bdab78c94e412

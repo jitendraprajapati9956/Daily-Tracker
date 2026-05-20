@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-expressions */
 
@@ -21,7 +20,6 @@ self.addEventListener('fetch', (event) => {
       return response || fetch(event.request);
     })
   );
-=======
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-expressions */
 
@@ -44,5 +42,4 @@ self.addEventListener('fetch', (event) => {
       return response || fetch(event.request);
     })
   );
->>>>>>> 187a771c8e17bf05e25c8a29098bdab78c94e412
 });

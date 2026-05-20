@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const Tracker = require("../models/Tracker");
 
 exports.saveTracker = async (req, res) => {
@@ -68,7 +67,6 @@ exports.saveSankalp = async (req, res) => {
   await tracker.save();
 
   res.json({ success: true });
-=======
 const Tracker = require("../models/Tracker");
 
 exports.saveTracker = async (req, res) => {
@@ -138,5 +136,4 @@ exports.saveSankalp = async (req, res) => {
   await tracker.save();
 
   res.json({ success: true });
->>>>>>> 187a771c8e17bf05e25c8a29098bdab78c94e412
 };

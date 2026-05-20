@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
@@ -74,7 +73,6 @@ exports.resetPassword = async (req, res) => {
 // ✅ Get current user (protected)
 exports.getMe = async (req, res) => {
     res.json({ user: req.user });
-=======
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
@@ -150,5 +148,4 @@ exports.resetPassword = async (req, res) => {
 // ✅ Get current user (protected)
 exports.getMe = async (req, res) => {
     res.json({ user: req.user });
->>>>>>> 187a771c8e17bf05e25c8a29098bdab78c94e412
 };

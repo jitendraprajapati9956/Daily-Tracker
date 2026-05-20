@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const mongoose = require("mongoose");
 
 const trackerSchema = new mongoose.Schema({
@@ -39,7 +38,6 @@ const trackerSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("Tracker", trackerSchema);
-=======
 const mongoose = require("mongoose");
 
 const trackerSchema = new mongoose.Schema({
@@ -80,4 +78,3 @@ const trackerSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("Tracker", trackerSchema);
->>>>>>> 187a771c8e17bf05e25c8a29098bdab78c94e412

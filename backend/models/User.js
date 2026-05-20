@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
@@ -20,7 +19,6 @@ userSchema.methods.matchPassword = async function (entered) {
     return bcrypt.compare(entered, this.password);
 };
 
-=======
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
@@ -42,5 +40,4 @@ userSchema.methods.matchPassword = async function (entered) {
     return bcrypt.compare(entered, this.password);
 };
 
->>>>>>> 187a771c8e17bf05e25c8a29098bdab78c94e412
 module.exports = mongoose.model("User", userSchema);

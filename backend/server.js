@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 require("dotenv").config();
 const cron = require("node-cron");
 const express = require("express");
@@ -38,7 +37,6 @@ app.use("/tracker", trackerRoutes);
 app.use("/api", require("./routes/japRoutes"));
 app.use("/api/auth", require("./routes/authRoutes"));
 app.listen(5000, () => console.log("Server running on port 5000"));
-=======
 require("dotenv").config();
 const cron = require("node-cron");
 const express = require("express");
@@ -78,4 +76,3 @@ app.use("/tracker", trackerRoutes);
 app.use("/api", require("./routes/japRoutes"));
 app.use("/api/auth", require("./routes/authRoutes"));
 app.listen(5000, () => console.log("Server running on port 5000"));
->>>>>>> 187a771c8e17bf05e25c8a29098bdab78c94e412

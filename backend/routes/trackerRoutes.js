@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const express = require("express");
 const router = express.Router();
 const Tracker = require("../models/Tracker");
@@ -28,7 +27,6 @@ router.get("/all", async (req, res) => {
 });
 
 module.exports = router;
-=======
 const express = require("express");
 const router = express.Router();
 const Tracker = require("../models/Tracker");
@@ -58,4 +56,3 @@ router.get("/all", async (req, res) => {
 });
 
 module.exports = router;
->>>>>>> 187a771c8e17bf05e25c8a29098bdab78c94e412

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const express = require("express");
 const router = express.Router();
 
@@ -14,7 +13,6 @@ router.get("/jap", (req, res) => {
 });
 
 module.exports = router;
-=======
 const express = require("express");
 const router = express.Router();
 
@@ -30,4 +28,3 @@ router.get("/jap", (req, res) => {
 });
 
 module.exports = router;
->>>>>>> 187a771c8e17bf05e25c8a29098bdab78c94e412

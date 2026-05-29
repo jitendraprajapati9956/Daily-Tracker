@@ -12,8 +12,7 @@ export default function WakeUpTracker({ onBonus }) {
     } else {
       onBonus && onBonus(2); // +2 Krupa Points
     }
-  }, []);
-
+ }, [onBonus]);
   return (
     <div>
       <h3>🌅 Wake-Up Time</h3>

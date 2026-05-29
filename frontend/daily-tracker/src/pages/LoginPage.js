@@ -33,8 +33,10 @@ export default function LoginPage() {
 
             login(data.token, data.user);
             navigate("/");
-        } catch {
-            setError("Something went wrong");
+        } catch (err) {
+   console.log(err);
+   setError(err.message);
+}
         } finally {
             setLoading(false);
         }

@@ -1,0 +1,2 @@
+(()=>{[{'revision':'79e4adbf71a2400735f7f4ff58b482aa','url':'/index.html'},{'revision':null,'url':'/static/js/main.f6339661.js'}];const e=["/"];self.addEventListener("install",t=>{t.waitUntil(caches.open("daily-tracker-cache-v1").then(t=>t.addAll(e)))}),self.addEventListener("fetch",e=>{e.respondWith(caches.match(e.request).then(t=>t||fetch(e.request)))})})();
+//# sourceMappingURL=service-worker.js.map

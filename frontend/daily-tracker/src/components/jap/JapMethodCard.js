@@ -77,25 +77,5 @@ const JapMethodCard = () => {
   );
 };
 
-const card = {
-  background: "#fff",
-  padding: "16px",
-  borderRadius: "12px",
-  marginTop: "16px",
-  boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-};
-
-const btn = {
-  display: "block",
-  width: "100%",
-  marginTop: "8px",
-  padding: "10px",
-  borderRadius: "8px",
-  border: "none",
-  background: "#4CAF50",
-  color: "#fff",
-  fontWeight: "bold",
-  cursor: "pointer",
-};
 
 export default JapMethodCard;

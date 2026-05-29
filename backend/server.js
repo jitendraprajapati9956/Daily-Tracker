@@ -10,7 +10,6 @@ const trackerRoutes = require("./routes/trackerRoutes");
 const japRoutes = require("./routes/japRoutes");
 const authRoutes = require("./routes/authRoutes");
 
-// IMPORTANT
 const Tracker = require("./models/Tracker");
 
 const app = express();
@@ -37,7 +36,7 @@ app.use("/api", japRoutes);
 
 app.use("/api/auth", authRoutes);
 
-// HEALTH CHECK
+// TEST ROUTE
 app.get("/", (req, res) => {
   res.send("API Running ✅");
 });

@@ -155,18 +155,6 @@ export default function NamJapTrackerPage() {
     setEntries(recalculated);
   };
 
-  // PROOF BUTTON
-  const proofEntry = (item) => {
-    alert(
-      `📿 Naam Jap Proof
-
-Date: ${item.date}
-Day: ${item.dayNo}
-Today Jap: ${item.todayCount}
-Total Jap: ${item.grandTotal}`
-    );
-  };
-
   // GRAPH DATA
   const chartData = [...entries]
     .reverse()

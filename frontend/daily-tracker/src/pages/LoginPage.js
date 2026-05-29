@@ -15,8 +15,8 @@ export default function LoginPage() {
         setLoading(true);
 
         const endpoint = isSignup
-            ? "http://localhost:5000/api/auth/signup"
-            : "http://localhost:5000/api/auth/signin";
+            ? "https://daily-tracker-1nvd.onrender.com/api/auth/signup"
+            : "https://daily-tracker-1nvd.onrender.com/api/auth/signin";
         const body = isSignup
             ? form
             : { email: form.email, password: form.password };

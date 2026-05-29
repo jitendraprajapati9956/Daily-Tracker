@@ -16,7 +16,7 @@ export default function ForgotPasswordPage() {
         setLoading(true); setError("");
 
         try {
-            const res = await fetch("http://localhost:5000/api/auth/forgot-password", {
+            const res = await fetch("https://daily-tracker-1nvd.onrender.com/api/auth/forgot-password", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email }),
@@ -39,7 +39,7 @@ export default function ForgotPasswordPage() {
         setLoading(true); setError("");
 
         try {
-            const res = await fetch("http://localhost:5000/api/auth/reset-password", {
+            const res = await fetch("https://daily-tracker-1nvd.onrender.com/api/auth/reset-password", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password }),
@@ -65,7 +65,7 @@ export default function ForgotPasswordPage() {
                 {step === 1 && (
                     <>
                         <h2 style={styles.title}>🔑 Forgot Password</h2>
-                        <p style={styles.subtitle}>તમારો email દાખલ કરો</p>
+                        <p style={styles.subtitle}>Your email</p>
 
                         {error && <p style={styles.error}>{error}</p>}
 
@@ -91,7 +91,7 @@ export default function ForgotPasswordPage() {
                 {step === 2 && (
                     <>
                         <h2 style={styles.title}>🔒 New Password</h2>
-                        <p style={styles.subtitle}>{email} માટે નવો password set કરો</p>
+                        <p style={styles.subtitle}>{email} New password </p>
 
                         {error && <p style={styles.error}>{error}</p>}
 

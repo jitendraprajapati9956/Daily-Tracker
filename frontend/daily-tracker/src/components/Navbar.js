@@ -11,6 +11,7 @@ export default function Navbar({ active, setActive }) {
     { id: "routine", label: "Routine" },
     { id: "satsang", label: "Satsang" },
     { id: "tracker", label: "📅 Tracker" },
+    { id: "namjap", label: "📿 NaamJap" },
   ];
 
   return (

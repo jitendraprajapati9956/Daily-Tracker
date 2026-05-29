@@ -8,7 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import MonthlyReport from "./pages/MonthlyReport";
 import StreakPage from "./pages/StreakPage";
 import RoutinePage from "./pages/RoutinePage";
-
+import NamJapTrackerPage from "./pages/NamJapTrackerPage";
 function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
   if (loading) return <p style={{ textAlign: "center", marginTop: "40px" }}>Loading...</p>;
@@ -25,6 +25,10 @@ function AppRoutes() {
       <Route path="/report" element={<ProtectedRoute><MonthlyReport /></ProtectedRoute>} />
       <Route path="/streak" element={<ProtectedRoute><StreakPage /></ProtectedRoute>} />
       <Route path="/routine" element={<ProtectedRoute><RoutinePage /></ProtectedRoute>} />
+      <Route
+        path="/namjaptracker"
+        element={<NamJapTrackerPage />}
+      />
     </Routes>
   );
 }

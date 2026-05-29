@@ -11,16 +11,3 @@ export const syncToMongo = async (data) => {
     console.log("Sync failed");
   }
 };
-export const syncToMongo = async (data) => {
-  try {
-    await fetch("http://localhost:5000/api/tracker/save", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-  } catch (err) {
-    console.log("Sync failed");
-  }
-};

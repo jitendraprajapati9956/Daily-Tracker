@@ -4,7 +4,7 @@ import {
     Tooltip, ResponsiveContainer
 } from "recharts";
 
-const HABITS = [
+const DEFAULT_HABITS = [
     "Naam Jap (5 min)",
     "Satsang / Bhajan",
     "Prarthana",
@@ -14,7 +14,7 @@ const HABITS = [
     "Seva",
     "Mala (5+)",
     "No Reel > 15 min",
-    "Early Wake (before 7)"
+    "Early Wake (before 7)",
 ];
 
 const DAYS = Array.from({ length: 31 }, (_, i) => i + 1);
@@ -28,46 +28,127 @@ export default function MonthlyTrackerPage() {
     const today = new Date();
     const [month, setMonth] = useState(MONTHS[today.getMonth()]);
     const [year, setYear] = useState(today.getFullYear());
-    const [grid, setGrid] = useState(
-        () => Array.from({ length: 10 }, () => Array(31).fill(false))
-    );
 
+    // ─────────────────────────
+    // HABITS STATE
+    // ─────────────────────────
+    const [habits, setHabits] = useState(() => {
+        const saved = localStorage.getItem("habits");
+        return saved ? JSON.parse(saved) : DEFAULT_HABITS;
+    });
+
+    const [newHabit, setNewHabit] = useState("");
+
+    // ─────────────────────────
+    // GRID STATE
+    // ─────────────────────────
     const storageKey = `habitGrid_${month}_${year}`;
 
-    // Load saved data
+    const createEmptyGrid = (habitCount) =>
+        Array.from({ length: habitCount }, () => Array(31).fill(false));
+
+    const [grid, setGrid] = useState(() => createEmptyGrid(habits.length));
+
+    // Save habits
+    useEffect(() => {
+        localStorage.setItem("habits", JSON.stringify(habits));
+    }, [habits]);
+
+    // Load monthly data
     useEffect(() => {
         const saved = localStorage.getItem(storageKey);
-        if (saved) setGrid(JSON.parse(saved));
-        else setGrid(Array.from({ length: 10 }, () => Array(31).fill(false)));
-    }, [month, year]);
 
-    // Save on change
+        if (saved) {
+            const parsed = JSON.parse(saved);
+
+            // Adjust rows if habits changed
+            const updatedGrid = [...parsed];
+
+            while (updatedGrid.length < habits.length) {
+                updatedGrid.push(Array(31).fill(false));
+            }
+
+            while (updatedGrid.length > habits.length) {
+                updatedGrid.pop();
+            }
+
+            setGrid(updatedGrid);
+        } else {
+            setGrid(createEmptyGrid(habits.length));
+        }
+    }, [month, year, habits.length]);
+
+    // Save grid
     useEffect(() => {
         localStorage.setItem(storageKey, JSON.stringify(grid));
     }, [grid, storageKey]);
 
+    // Toggle checkbox
     const toggle = (row, col) => {
-        setGrid(prev => {
-            const next = prev.map(r => [...r]);
+        setGrid((prev) => {
+            const next = prev.map((r) => [...r]);
             next[row][col] = !next[row][col];
             return next;
         });
     };
 
-    // Daily score = how many habits done each day
-    const dailyScores = DAYS.map(d => ({
+    // ─────────────────────────
+    // ADD HABIT
+    // ─────────────────────────
+    const addHabit = () => {
+        if (!newHabit.trim()) return;
+
+        setHabits((prev) => [...prev, newHabit]);
+
+        setGrid((prev) => [...prev, Array(31).fill(false)]);
+
+        setNewHabit("");
+    };
+
+    // ─────────────────────────
+    // DELETE HABIT
+    // ─────────────────────────
+    const deleteHabit = (index) => {
+        if (!window.confirm("Delete this habit?")) return;
+
+        setHabits((prev) => prev.filter((_, i) => i !== index));
+
+        setGrid((prev) => prev.filter((_, i) => i !== index));
+    };
+
+    // ─────────────────────────
+    // EDIT HABIT
+    // ─────────────────────────
+    const editHabit = (index) => {
+        const updated = prompt("Edit Habit", habits[index]);
+
+        if (!updated || !updated.trim()) return;
+
+        setHabits((prev) =>
+            prev.map((h, i) => (i === index ? updated : h))
+        );
+    };
+
+    // Daily scores
+    const dailyScores = DAYS.map((d) => ({
         day: d,
-        done: grid.reduce((acc, row) => acc + (row[d - 1] ? 1 : 0), 0)
+        done: grid.reduce(
+            (acc, row) => acc + (row[d - 1] ? 1 : 0),
+            0
+        ),
     }));
+
 
     // Stats
     const totalChecks = grid.flat().filter(Boolean).length;
-    const perfectDays = dailyScores.filter(d => d.done === 10).length;
+    const perfectDays = dailyScores.filter(
+        d => d.done === habits.length
+    ).length;
     const avgScore = (dailyScores.reduce((a, b) => a + b.done, 0) / 31).toFixed(1);
 
     const clearAll = () => {
         if (window.confirm("બધું clear કરવું છે?")) {
-            setGrid(Array.from({ length: 10 }, () => Array(31).fill(false)));
+            setGrid(createEmptyGrid(habits.length));
         }
     };
 
@@ -78,15 +159,73 @@ export default function MonthlyTrackerPage() {
             <div style={s.header}>
                 <div>
                     <h2 style={s.title}>📅 Monthly Habit Tracker</h2>
-                    <p style={s.quote}>"Success is the Product of Daily Habits" — James Clear</p>
+                    <p style={s.quote}>
+                        "Success is the Product of Daily Habits" — James Clear
+                    </p>
                 </div>
+
                 <div style={s.monthRow}>
-                    <select style={s.select} value={month} onChange={e => setMonth(e.target.value)}>
-                        {MONTHS.map(m => <option key={m}>{m}</option>)}
+                    <select
+                        style={s.select}
+                        value={month}
+                        onChange={e => setMonth(e.target.value)}
+                    >
+                        {MONTHS.map(m => (
+                            <option key={m}>{m}</option>
+                        ))}
                     </select>
-                    <select style={s.select} value={year} onChange={e => setYear(Number(e.target.value))}>
-                        {[2024, 2025, 2026, 2027].map(y => <option key={y}>{y}</option>)}
+
+                    <select
+                        style={s.select}
+                        value={year}
+                        onChange={e => setYear(Number(e.target.value))}
+                    >
+                        {[2024, 2025, 2026, 2027].map(y => (
+                            <option key={y}>{y}</option>
+                        ))}
                     </select>
+                </div>
+            </div>
+
+            {/* ── ADD HABIT ── */}
+            <div style={s.card}>
+                <div
+                    style={{
+                        display: "flex",
+                        gap: 10,
+                        flexWrap: "wrap",
+                        alignItems: "center",
+                    }}
+                >
+                    <input
+                        value={newHabit}
+                        onChange={(e) => setNewHabit(e.target.value)}
+                        placeholder="Add New Habit"
+                        style={{
+                            flex: 1,
+                            minWidth: 220,
+                            padding: "12px",
+                            borderRadius: "10px",
+                            border: "1px solid #e2e8f0",
+                            fontSize: "14px",
+                            outline: "none",
+                        }}
+                    />
+
+                    <button
+                        onClick={addHabit}
+                        style={{
+                            padding: "12px 18px",
+                            border: "none",
+                            borderRadius: "10px",
+                            background: "#16a34a",
+                            color: "#fff",
+                            cursor: "pointer",
+                            fontWeight: "700",
+                        }}
+                    >
+                        + Add Habit
+                    </button>
                 </div>
             </div>
 
@@ -96,16 +235,24 @@ export default function MonthlyTrackerPage() {
                     <span style={s.statNum}>{totalChecks}</span>
                     <span style={s.statLabel}>Total ✔️</span>
                 </div>
+
                 <div style={s.statBox}>
                     <span style={s.statNum}>{perfectDays}</span>
                     <span style={s.statLabel}>Perfect Days 🌟</span>
                 </div>
+
                 <div style={s.statBox}>
                     <span style={s.statNum}>{avgScore}</span>
                     <span style={s.statLabel}>Avg Score 📊</span>
                 </div>
+
                 <div style={s.statBox}>
-                    <span style={s.statNum}>{Math.round((totalChecks / (31 * 10)) * 100)}%</span>
+                    <span style={s.statNum}>
+                        {Math.round(
+                            (totalChecks / (31 * habits.length)) * 100
+                        )}%
+                    </span>
+
                     <span style={s.statLabel}>Completion 🎯</span>
                 </div>
             </div>
@@ -116,51 +263,149 @@ export default function MonthlyTrackerPage() {
                     <table style={s.table}>
                         <thead>
                             <tr>
-                                <th style={{ ...s.th, ...s.habitCol, textAlign: "left" }}>
+                                <th
+                                    style={{
+                                        ...s.th,
+                                        ...s.habitCol,
+                                        textAlign: "left",
+                                    }}
+                                >
                                     HABITS / PROTOCOLS
                                 </th>
+
                                 {DAYS.map(d => (
-                                    <th key={d} style={{
-                                        ...s.th, ...s.dayCol,
-                                        background: d === today.getDate() && month === MONTHS[today.getMonth()]
-                                            ? "#dcfce7" : "#f8fafc",
-                                        color: d === today.getDate() && month === MONTHS[today.getMonth()]
-                                            ? "#16a34a" : "#64748b",
-                                        fontWeight: d === today.getDate() ? "800" : "600"
-                                    }}>
+                                    <th
+                                        key={d}
+                                        style={{
+                                            ...s.th,
+                                            ...s.dayCol,
+                                            background:
+                                                d === today.getDate() &&
+                                                    month === MONTHS[today.getMonth()]
+                                                    ? "#dcfce7"
+                                                    : "#f8fafc",
+
+                                            color:
+                                                d === today.getDate() &&
+                                                    month === MONTHS[today.getMonth()]
+                                                    ? "#16a34a"
+                                                    : "#64748b",
+
+                                            fontWeight:
+                                                d === today.getDate()
+                                                    ? "800"
+                                                    : "600",
+                                        }}
+                                    >
                                         {d}
                                     </th>
                                 ))}
                             </tr>
                         </thead>
+
                         <tbody>
-                            {HABITS.map((habit, ri) => {
-                                const rowDone = grid[ri].filter(Boolean).length;
+                            {habits.map((habit, ri) => {
+                                const rowDone =
+                                    grid[ri]?.filter(Boolean).length || 0;
+
                                 return (
-                                    <tr key={ri} style={{ background: ri % 2 === 0 ? "#fff" : "#fafafa" }}>
+                                    <tr
+                                        key={ri}
+                                        style={{
+                                            background:
+                                                ri % 2 === 0
+                                                    ? "#fff"
+                                                    : "#fafafa",
+                                        }}
+                                    >
                                         <td style={s.habitCell}>
-                                            <span style={s.habitNum}>{ri + 1}</span>
-                                            <span style={s.habitName}>{habit}</span>
-                                            <span style={{
-                                                ...s.rowCount,
-                                                background: rowDone >= 20 ? "#dcfce7" : rowDone >= 10 ? "#fef9c3" : "#f1f5f9",
-                                                color: rowDone >= 20 ? "#16a34a" : rowDone >= 10 ? "#ca8a04" : "#94a3b8"
-                                            }}>
+
+                                            <span style={s.habitNum}>
+                                                {ri + 1}
+                                            </span>
+
+                                            <span style={s.habitName}>
+                                                {habit}
+                                            </span>
+
+                                            <span
+                                                style={{
+                                                    ...s.rowCount,
+                                                    background:
+                                                        rowDone >= 20
+                                                            ? "#dcfce7"
+                                                            : rowDone >= 10
+                                                                ? "#fef9c3"
+                                                                : "#f1f5f9",
+
+                                                    color:
+                                                        rowDone >= 20
+                                                            ? "#16a34a"
+                                                            : rowDone >= 10
+                                                                ? "#ca8a04"
+                                                                : "#94a3b8",
+                                                }}
+                                            >
                                                 {rowDone}
                                             </span>
+
+                                            {/* EDIT */}
+                                            <button
+                                                onClick={() => editHabit(ri)}
+                                                style={{
+                                                    border: "none",
+                                                    background: "#facc15",
+                                                    padding: "4px 8px",
+                                                    borderRadius: 6,
+                                                    cursor: "pointer",
+                                                    fontSize: 11,
+                                                    fontWeight: "600",
+                                                }}
+                                            >
+                                                Edit
+                                            </button>
+
+                                            {/* DELETE */}
+                                            <button
+                                                onClick={() => deleteHabit(ri)}
+                                                style={{
+                                                    border: "none",
+                                                    background: "#ef4444",
+                                                    color: "#fff",
+                                                    padding: "4px 8px",
+                                                    borderRadius: 6,
+                                                    cursor: "pointer",
+                                                    fontSize: 11,
+                                                    fontWeight: "600",
+                                                }}
+                                            >
+                                                Delete
+                                            </button>
                                         </td>
+
                                         {DAYS.map(d => (
                                             <td
                                                 key={d}
-                                                onClick={() => toggle(ri, d - 1)}
+                                                onClick={() =>
+                                                    toggle(ri, d - 1)
+                                                }
                                                 style={{
                                                     ...s.cell,
-                                                    background: grid[ri][d - 1] ? "#16a34a" : "transparent",
-                                                    borderRadius: grid[ri][d - 1] ? "6px" : "4px",
+                                                    background:
+                                                        grid[ri]?.[d - 1]
+                                                            ? "#16a34a"
+                                                            : "transparent",
+
+                                                    borderRadius:
+                                                        grid[ri]?.[d - 1]
+                                                            ? "6px"
+                                                            : "4px",
                                                 }}
                                             >
-                                                {grid[ri][d - 1] && (
-                                                    <span style={s.check}>✓</span>
+                                                {grid[ri]?.[d - 1] && (
+                                                    <span style={s.check}>
+                                                        ✓
+                                                    </span>
                                                 )}
                                             </td>
                                         ))}
@@ -170,19 +415,42 @@ export default function MonthlyTrackerPage() {
 
                             {/* Score row */}
                             <tr style={{ borderTop: "2px solid #e2e8f0" }}>
-                                <td style={{ ...s.habitCell, fontWeight: "700", color: "#1e293b" }}>
+                                <td
+                                    style={{
+                                        ...s.habitCell,
+                                        fontWeight: "700",
+                                        color: "#1e293b",
+                                    }}
+                                >
                                     <span style={s.habitNum}>✦</span>
                                     <span>Daily Score</span>
                                 </td>
+
                                 {dailyScores.map(({ day, done }) => (
-                                    <td key={day} style={{
-                                        ...s.cell,
-                                        fontWeight: "700",
-                                        fontSize: "11px",
-                                        color: done >= 8 ? "#16a34a" : done >= 5 ? "#ca8a04" : done > 0 ? "#64748b" : "#e2e8f0",
-                                        background: done >= 8 ? "#dcfce7" : "transparent",
-                                        borderRadius: "4px"
-                                    }}>
+                                    <td
+                                        key={day}
+                                        style={{
+                                            ...s.cell,
+                                            fontWeight: "700",
+                                            fontSize: "11px",
+
+                                            color:
+                                                done >= 8
+                                                    ? "#16a34a"
+                                                    : done >= 5
+                                                        ? "#ca8a04"
+                                                        : done > 0
+                                                            ? "#64748b"
+                                                            : "#e2e8f0",
+
+                                            background:
+                                                done >= 8
+                                                    ? "#dcfce7"
+                                                    : "transparent",
+
+                                            borderRadius: "4px",
+                                        }}
+                                    >
                                         {done > 0 ? done : ""}
                                     </td>
                                 ))}
@@ -194,19 +462,49 @@ export default function MonthlyTrackerPage() {
 
             {/* ── Score Chart ── */}
             <div style={s.card}>
-                <h3 style={s.cardTitle}>📈 Score Graph — {month} {year}</h3>
+                <h3 style={s.cardTitle}>
+                    📈 Score Graph — {month} {year}
+                </h3>
+
                 <ResponsiveContainer width="100%" height={200}>
-                    <LineChart data={dailyScores} margin={{ top: 5, right: 10, left: -20, bottom: 5 }}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-                        <XAxis dataKey="day" tick={{ fontSize: 11 }} interval={4} />
-                        <YAxis domain={[0, 10]} ticks={[0, 2, 4, 6, 8, 10]} tick={{ fontSize: 11 }} />
+                    <LineChart
+                        data={dailyScores}
+                        margin={{
+                            top: 5,
+                            right: 10,
+                            left: -20,
+                            bottom: 5,
+                        }}
+                    >
+                        <CartesianGrid
+                            strokeDasharray="3 3"
+                            stroke="#f1f5f9"
+                        />
+
+                        <XAxis
+                            dataKey="day"
+                            tick={{ fontSize: 11 }}
+                            interval={4}
+                        />
+
+                        <YAxis
+                            domain={[0, habits.length]}
+                            tick={{ fontSize: 11 }}
+                        />
+
                         <Tooltip
-                            formatter={(v) => [`${v}/10`, "Score"]}
+                            formatter={(v) => [
+                                `${v}/${habits.length}`,
+                                "Score",
+                            ]}
                             labelFormatter={(l) => `Day ${l}`}
                         />
+
                         <Line
-                            type="monotone" dataKey="done"
-                            stroke="#16a34a" strokeWidth={2.5}
+                            type="monotone"
+                            dataKey="done"
+                            stroke="#16a34a"
+                            strokeWidth={2.5}
                             dot={{ r: 3, fill: "#16a34a" }}
                             activeDot={{ r: 5 }}
                         />
@@ -214,20 +512,6 @@ export default function MonthlyTrackerPage() {
                 </ResponsiveContainer>
             </div>
 
-            {/* ── Legend ── */}
-            <div style={s.legend}>
-                <div style={s.legendItem}>
-                    <span style={{ ...s.dot, background: "#16a34a" }} /> ✓ Done
-                </div>
-                <div style={s.legendItem}>
-                    <span style={{ ...s.dot, background: "#f1f5f9", border: "1px solid #e2e8f0" }} /> Empty
-                </div>
-                <div style={{ ...s.legendItem, marginLeft: "auto" }}>
-                    <span style={{ ...s.dot, background: "#16a34a40", width: 10, height: 10 }} />
-                    Today highlighted
-                </div>
-                <button onClick={clearAll} style={s.clearBtn}>🗑 Clear All</button>
-            </div>
 
         </div>
     );

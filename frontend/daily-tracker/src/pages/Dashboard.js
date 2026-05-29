@@ -26,6 +26,7 @@ import SatsangCard from "../components/satsang/SatsangCard";
 import MotivationCard from "../components/satsang/MotivationCard";
 import Navbar from "../components/Navbar";
 import MonthlyTrackerPage from "./MonthlyTrackerPage";
+import NamJapTrackerPage from "./NamJapTrackerPage";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("progress");
@@ -154,9 +155,12 @@ export default function Dashboard() {
       {activeTab === "tracker" && (
         <MonthlyTrackerPage />
       )}
+      {/* === NAAM JAP TRACKER === */}
+      {activeTab === "namjap" && (
+        <NamJapTrackerPage />
+      )}
+    </div >
+    </div >
 
-    </div >
-    </div >
-    
   );
- }
+}

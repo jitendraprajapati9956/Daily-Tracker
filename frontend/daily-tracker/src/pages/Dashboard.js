@@ -34,14 +34,14 @@ export default function Dashboard() {
   const [noFap, setNoFap] = useState(true);
   const [japDone, setJapDone] = useState(false);
 
-  // ✅ Move useEffect INSIDE component
-  useEffect(() => {
-    const hour = new Date().getHours();
+  // // ✅ Move useEffect INSIDE component
+  // useEffect(() => {
+  //   const hour = new Date().getHours();
 
-    if (hour > 8) {
-      alert("⚠️ Mobile check before Jap = streak risk");
-    }
-  }, []);
+  //   if (hour > 8) {
+  //     alert("⚠️ Mobile check before Jap = streak risk");
+  //   }
+  // }, []);
 
   useEffect(() => {
     const today = new Date().getDay();

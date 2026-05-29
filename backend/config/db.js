@@ -1,15 +1,15 @@
 const mongoose = require("mongoose");
 
 const connectDB = async () => {
-  await mongoose.connect("mongodb://127.0.0.1:27017/dailyTracker");
-  console.log("MongoDB Connected");
-};
+  try {
+    await mongoose.connect(
+      "mongodb+srv://jitendraprajapati9956_db_user:jitendraprajapati9956@dailytracker.hrupv93.mongodb.net/dailytracker?retryWrites=true&w=majority"
+    );
 
-const mongoose = require("mongoose");
-
-const connectDB = async () => {
-  await mongoose.connect("mongodb://127.0.0.1:27017/dailyTracker");
-  console.log("MongoDB Connected");
+    console.log("MongoDB Connected");
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 module.exports = connectDB;

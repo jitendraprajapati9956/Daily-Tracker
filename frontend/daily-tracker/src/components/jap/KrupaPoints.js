@@ -47,13 +47,6 @@ const KrupaPoints = () => {
   );
 };
 
-const card = {
-  background: "#fff",
-  padding: "16px",
-  borderRadius: "12px",
-  marginTop: "16px",
-  boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-  textAlign: "center",
-};
+
 
 export default KrupaPoints;

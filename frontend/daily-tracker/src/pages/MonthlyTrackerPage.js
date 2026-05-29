@@ -76,7 +76,7 @@ export default function MonthlyTrackerPage() {
         } else {
             setGrid(createEmptyGrid(habits.length));
         }
-    }, [month, year, habits.length]);
+    }, [month, year, habits.length, storageKey]);
 
     // Save grid
     useEffect(() => {

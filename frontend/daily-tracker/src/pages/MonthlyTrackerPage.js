@@ -146,12 +146,7 @@ export default function MonthlyTrackerPage() {
     ).length;
     const avgScore = (dailyScores.reduce((a, b) => a + b.done, 0) / 31).toFixed(1);
 
-    const clearAll = () => {
-        if (window.confirm("બધું clear કરવું છે?")) {
-            setGrid(createEmptyGrid(habits.length));
-        }
-    };
-
+    
     return (
         <div style={s.page}>
 

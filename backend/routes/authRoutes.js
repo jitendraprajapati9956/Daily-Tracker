@@ -13,7 +13,11 @@ router.post("/signup", signup);
 router.post("/signin", signin);
 router.post("/forgot-password", forgotPassword);
 router.post("/reset-password", resetPassword);
-router.get("/me", auth, getMe);
+router.get("/me", authMiddleware, (req, res) => {
+  res.json({
+    user: req.user,
+  });
+});
 
 
 module.exports = router;

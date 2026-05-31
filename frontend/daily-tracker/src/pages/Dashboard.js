@@ -76,9 +76,11 @@ export default function Dashboard() {
   });
 
   return (
-    <div
+<div
   style={{
     width: "100%",
+    maxWidth: "1400px",
+    margin: "0 auto",
     padding: "20px",
     boxSizing: "border-box",
   }}

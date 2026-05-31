@@ -9,9 +9,11 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     if (token) {
-      fetch("/api/auth/me", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      fetch("https://daily-tracker-1nvd.onrender.com/api/auth/me", {
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+})
         .then((r) => r.json())
         .then((d) => { setUser(d.user); setLoading(false); })
         .catch(() => { logout(); setLoading(false); });

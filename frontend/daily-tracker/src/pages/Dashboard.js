@@ -76,15 +76,8 @@ export default function Dashboard() {
   });
 
   return (
-<div
-  style={{
-    width: "100%",
-    maxWidth: "1400px",
-    margin: "0 auto",
-    padding: "20px",
-    boxSizing: "border-box",
-  }}
->
+<div className="dashboard">  <div style={{ maxWidth: "1000px", margin: "auto", padding: "10px" }}>
+
 
       <h2>Dashboard</h2>
 
@@ -171,4 +164,33 @@ export default function Dashboard() {
     </div >
 
   );
+}
+.dashboard {
+  width: 100%;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.dashboard-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.top-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .top-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-container {
+    padding: 10px;
+  }
 }

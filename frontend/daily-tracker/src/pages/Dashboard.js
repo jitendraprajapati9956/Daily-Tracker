@@ -76,7 +76,13 @@ export default function Dashboard() {
   });
 
   return (
-    <div className="dashboard">  <div style={{ maxWidth: "1000px", margin: "auto", padding: "10px" }}>
+    <div
+  style={{
+    width: "100%",
+    padding: "20px",
+    boxSizing: "border-box",
+  }}
+>
 
       <h2>Dashboard</h2>
 

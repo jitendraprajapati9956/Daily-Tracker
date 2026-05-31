@@ -34,9 +34,9 @@ export default function LoginPage() {
             login(data.token, data.user);
             navigate("/");
         } catch (err) {
-   console.log(err);
-   setError(err.message);
-}
+  console.error("LOGIN ERROR:", err);
+  setError(err.message || "Something went wrong");
+
         } finally {
             setLoading(false);
         }

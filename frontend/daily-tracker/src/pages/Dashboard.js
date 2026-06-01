@@ -28,6 +28,7 @@ import Navbar from "../components/Navbar";
 import MonthlyTrackerPage from "./MonthlyTrackerPage";
 import NamJapTrackerPage from "./NamJapTrackerPage";
 import { useAuth } from "../context/AuthContext";
+import { Navigate } from "react-router-dom";
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("progress");
   const [score, setScore] = useState(0);

@@ -27,7 +27,7 @@ import MotivationCard from "../components/satsang/MotivationCard";
 import Navbar from "../components/Navbar";
 import MonthlyTrackerPage from "./MonthlyTrackerPage";
 import NamJapTrackerPage from "./NamJapTrackerPage";
-
+import { useAuth } from "../context/AuthContext";
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("progress");
   const [score, setScore] = useState(0);
@@ -78,10 +78,21 @@ const { user } = useAuth();
 
 if (!user) {
   return <Navigate to="/login" />;
-}
+}const { logout } = useAuth();
   return (
 <div className="dashboard">  <div style={{ maxWidth: "1000px", margin: "auto", padding: "10px" }}>
-
+<button
+  onClick={logout}
+  style={{
+    padding: "10px",
+    background: "red",
+    color: "white",
+    border: "none",
+    borderRadius: "8px"
+  }}
+>
+  Logout
+</button>
 
       <h2>Dashboard</h2>
 

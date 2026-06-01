@@ -26,9 +26,13 @@ function AppRoutes() {
       <Route path="/streak" element={<ProtectedRoute><StreakPage /></ProtectedRoute>} />
       <Route path="/routine" element={<ProtectedRoute><RoutinePage /></ProtectedRoute>} />
       <Route
-        path="/namjaptracker"
-        element={<NamJapTrackerPage />}
-      />
+  path="/namjaptracker"
+  element={
+    <ProtectedRoute>
+      <NamJapTrackerPage />
+    </ProtectedRoute>
+  }
+/>
     </Routes>
   );
 }

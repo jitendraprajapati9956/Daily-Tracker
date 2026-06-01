@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../context/AuthContext";
 import {
   LineChart,
   Line,
@@ -10,20 +11,19 @@ import {
 } from "recharts";
 
 export default function NamJapTrackerPage() {
-  const [entries, setEntries] = useState(() => {
-    const saved = localStorage.getItem("namjap_entries");
-    return saved ? JSON.parse(saved) : [];
-  });
+  cconst { user } = useAuth();
+const storageKey = `namjap_entries_${user?._id}`;
 
-  const [count, setCount] = useState("");
+const [entries, setEntries] = useState([]);
 
-  // SAVE LOCAL STORAGE
-  useEffect(() => {
-    localStorage.setItem(
-      "namjap_entries",
-      JSON.stringify(entries)
-    );
-  }, [entries]);
+useEffect(() => {
+  const saved = localStorage.getItem(storageKey);
+  setEntries(saved ? JSON.parse(saved) : []);
+}, [storageKey]);
+
+useEffect(() => {
+  localStorage.setItem(storageKey, JSON.stringify(entries));
+}, [entries, storageKey]);
 
   // ADD ENTRY
   const addEntry = () => {

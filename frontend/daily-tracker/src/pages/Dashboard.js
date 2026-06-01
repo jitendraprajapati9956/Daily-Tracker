@@ -74,7 +74,11 @@ export default function Dashboard() {
     group: false,
     bhajan: false
   });
+const { user } = useAuth();
 
+if (!user) {
+  return <Navigate to="/login" />;
+}
   return (
 <div className="dashboard">  <div style={{ maxWidth: "1000px", margin: "auto", padding: "10px" }}>
 

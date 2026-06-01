@@ -74,11 +74,11 @@ export default function Dashboard() {
     group: false,
     bhajan: false
   });
-const { user } = useAuth();
+const { user, logout } = useAuth();
 
 if (!user) {
   return <Navigate to="/login" />;
-}const { logout } = useAuth();
+}
   return (
 <div className="dashboard">  <div style={{ maxWidth: "1000px", margin: "auto", padding: "10px" }}>
 <button

@@ -11,11 +11,11 @@ import {
 } from "recharts";
 
 export default function NamJapTrackerPage() {
-  cconst { user } = useAuth();
+  const { user } = useAuth();
 const storageKey = `namjap_entries_${user?._id}`;
 
 const [entries, setEntries] = useState([]);
-
+const [count, setCount] = useState("");
 useEffect(() => {
   const saved = localStorage.getItem(storageKey);
   setEntries(saved ? JSON.parse(saved) : []);
